@@ -192,7 +192,7 @@ main#app{margin-left:var(--rail); min-height:100vh}
 .wheel-dots i{width:6px; height:6px; border-radius:50%; background:rgba(16,38,74,.2); transition:background .3s, transform .3s}
 .wheel-dots i.is-active{background:var(--accent); transform:scale(1.4)}
 @media (min-width:720px){
-  .wheel{--step:26deg; --R:max(88vh, 72vw); --bh:max(52vh, min(30vw, 60vh)); height:calc(var(--n) * 70vh)}
+  .wheel{--step:24deg; --R:max(88vh, 72vw); --bh:max(52vh, min(30vw, 60vh)); height:calc(var(--n) * 70vh)}
   .wheel-ring{top:calc(100svh - var(--bh) - 16vh)}
   .wheel-name{top:24vh}
   .wheel-foot{bottom:36px; grid-template-columns:1fr auto 1fr; align-items:end; text-align:left; padding-right:calc(var(--gutter) + 64px)}
@@ -1765,7 +1765,7 @@ const PHOTOS = {
     const stage = $('.wheel-stage', sec), ring = $('.wheel-ring', sec), items = $$('.wheel-item', sec);
     const nameEl = $('.wheel-name', sec), tagEl = $('.wheel-tag', sec), linkEl = $('.wheel-link', sec), cnt = $('.wheel-count', sec), dots = $$('.wheel-dots i', sec);
     const n = items.length; let step = 22, cur = 0, target = 0, active = 0, raf = 0;
-    function layout() { step = parseFloat(getComputedStyle(sec).getPropertyValue('--step')) || 22; items.forEach((el, i) => el.style.setProperty('--a', (i * step) + 'deg')); ring.style.transform = 'rotate(' + (-cur * step) + 'deg)'; }
+    function layout() { step = parseFloat(getComputedStyle(sec).getPropertyValue('--step')) || 22; step = Math.min(step, 360 / n); items.forEach((el, i) => el.style.setProperty('--a', (i * step) + 'deg')); ring.style.transform = 'rotate(' + (-cur * step) + 'deg)'; }
     function setActive(i) {
       if (i === active && items[i].classList.contains('is-active')) return;
       active = i; const p = list[i];
